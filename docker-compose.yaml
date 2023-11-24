@@ -1,0 +1,26 @@
+version: '3'
+services:
+  redis:
+    image: redis:latest
+    container_name: redis-server
+    volumes:
+      - redis-data:/data
+    networks:
+      - app-network
+  backend:
+    # image: chs:5.5
+    build: 
+      context: .
+      dockerfile: dockerfile
+    depends_on:
+      - redis
+    networks:
+      - app-network
+    ports:
+      - "8080:8080"
+volumes:
+  redis-data:
+    driver: local
+networks:
+  app-network:
+    driver: bridge

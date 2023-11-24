@@ -1,0 +1,6 @@
+redis:
+  host: redis-server:6379
+  timeout: 5
+ninja:
+  api_key: 85b9abc6a1mshfee896658e555fbp11b3fajsn2aa2646e50d9
+

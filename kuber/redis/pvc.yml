@@ -1,0 +1,14 @@
+# creating a persistent volume claim kind manifest for redis
+apiVersion: v1
+kind: PersistentVolumeClaim
+
+metadata:
+  name: redisdb-pvc
+
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

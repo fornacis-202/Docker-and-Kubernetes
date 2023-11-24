@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  labels:
+    name: redis
+  name: redis
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: redis
+  template:
+    metadata:
+      labels:
+        name: redis
+    spec:
+      volumes:
+        - name: pvc
+          persistentVolumeClaim:
+            claimName: redisdb-pvc
+      containers:
+      - name: redis
+        image: redis
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 6379
+        volumeMounts:
+          - mountPath: "/data"
+            name: pvc
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
